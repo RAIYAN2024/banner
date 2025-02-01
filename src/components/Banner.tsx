@@ -8,17 +8,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { memo, useState } from "react";
+import { memo } from "react";
 import axios from "axios";
 import Image from "next/image";
 import useSWR from "swr";
 const Banner = memo(() => {
-  const [banners, setBanners] = useState([]);
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, isLoading } = useSWR(
     "https://677033222ffbd37a63cc6044.mockapi.io/api/v2/banner",
     fetcher
   );
+  if (isLoading) return;
   return (
     <>
       <Swiper
